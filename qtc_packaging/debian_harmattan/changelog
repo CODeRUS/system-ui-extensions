@@ -1,0 +1,125 @@
+system-ui-extensions (0.0.5.6) unstable; urgency=low
+
+  + Battery percentage in PSM icon.
+  * Some icons changed.
+  * Bugfixies.
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 3 Aug 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.5.5) unstable; urgency=low
+
+  * Fixed 75% bar bug.
+  * Fixed reboot service priority, possible fix for icon blinking.
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 3 Aug 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.5.4) unstable; urgency=low
+
+  + Settings for Brightness bar color.
+  * Fixed layouts, margins, etc.
+  * Some bugfixies.
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 2 Aug 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.5.3) unstable; urgency=low
+
+  * Flashlight now using ioctl, not gstreamer.
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 2 Aug 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.5.2) unstable; urgency=low
+
+  + Global Orientatiol Lock widget
+  * Fixies for upgrade from v0.0.4.X
+  * Small bugfixies
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 1 Aug 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.5.1) unstable; urgency=low
+
+  * Settings hotfix
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 29 Jul 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.5) unstable; urgency=low
+
+  + Initial Settings UI (only for tools applet yet)
+  * Reboot widget improvements
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 29 Jul 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.4.4) unstable; urgency=low
+
+  * Fix for reboot and Flashlight (really, i fixed it!)
+  * 6 icons in a row (+small changes in avialability margins)
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 27 Jul 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.4.3) unstable; urgency=low
+
+  * Stability fixies.
+  * Fixed flashlight and reboot (killed in 0.0.4.2 by mistake) (ha-ha)
+
+  TODO: 6 icons in a row
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 26 Jul 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.4.2) unstable; urgency=low
+
+  * Small fox for flashlight (ha-ha).
+  * Possible last fix for Reboot widget (ha-ha).
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 26 Jul 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.4.1) unstable; urgency=low
+
+  * Reboot widget fix (ha-ha).
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 25 Jul 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.4) unstable; urgency=low
+
+  * Fixed installation scripts. Install/Remove now without problems.
+  * Fixed layout. Linear layout with panning changed to Flow multirow layout.
+  * Add/Remove, Enable/Disable accounts fix for show/hide account icons.
+  * LongPress vibra feedback. StatusMenuIndicator have bug. Until finger not released status menu not hide, action not executed.
+  + Poweroff/Reboot widget
+  + Background connections widget
+
+  [IN PROGRESS, NOT IMPLEMENTED] Settings UI (in progress, not working yet)
+  MAYBE: Top infobar (battery percentage, etc)
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 11 Jul 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.3.f) unstable; urgency=low
+
+  * Long tap on Powersave widget open Battery settings
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 10 Jul 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.3) unstable; urgency=low
+
+  * Removed Flightmode widget (permmitted by Ovi QA sec.policy)
+  * Fixed Powersave widget to match Ovi QA sec.policy
+  + Added PSM Auto state
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 10 Jul 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.2) unstable; urgency=low
+
+  * New native-like icons
+  * Panning aviliability and toggles applets
+  * Fixed margins
+  * Fixed brightness slider blinks
+  * Fixed avialability icon infilite blink
+  * Fixed account icon hide/show
+  + Brightness widget
+  + USB mode widget
+
+ -- Andrey <coderusinbox@gmail.com>  Sun, 9 Jul 2012 22:20:29 +0600
+
+system-ui-extensions (0.0.1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Andrey <coderusinbox@gmail.com>  Fri, 29 Jun 2012 22:20:29 +0600

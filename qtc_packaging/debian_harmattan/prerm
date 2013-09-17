@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+gconftool -s -t str /apps/system-ui-extensions/prerm $1
+
+if [ "$1" == "remove" ] || [ "$1" == "purge" ] || [ "$1" == "abort-install" ]; then
+    if pidof reqReboot > /dev/null; then
+        if [ -n "`/sbin/initctl status apps/reqreboot | grep running`" ]
+        then
+            /sbin/initctl stop apps/extensionsDaemon
+        else
+            killall extensionsDaemon
+        fi
+    fi
+fi
+
+exit 0

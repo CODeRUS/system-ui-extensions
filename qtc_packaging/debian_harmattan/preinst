@@ -1,0 +1,104 @@
+#!/bin/sh
+
+set_applet()
+{
+    template_path="/usr/share/meegotouch/applicationextensions/statusindicatormenu-${1}.desktop"
+    template_data="[Desktop Entry]\nType=X-MeeGoApplicationExtension\nName=Status Indicator Menu Applet\n\n[X-MeeGoApplicationExtension]\nInterface=com.meego.core.MStatusIndicatorMenuExtensionInterface/1.0\nExtension=libstatusindicatormenu-${2}.so"
+    echo -e $template_data > $template_path
+}
+
+remove_applet()
+{
+    if [ -f /usr/share/meegotouch/applicationextensions/statusindicatormenu-${1}.desktop ]; then
+        rm -f /usr/share/meegotouch/applicationextensions/statusindicatormenu-${1}.desktop
+    fi
+}
+
+set -e
+
+gconftool -s -t str /apps/system-ui-extensions/preinst $1
+
+if [ "$1" == "install" ]; then
+    echo "Pre-installation script install ..."
+
+    set_applet internetconnection call
+    set_applet bluetooth internetconnection
+    remove_applet presence
+fi
+
+if pidof reqReboot > /dev/null; then
+    if [ -n "`initctl status apps/reqreboot | grep running`" ]
+    then
+        /sbin/initctl stop apps/extensionsDaemon
+    else
+        killall extensionsDaemon
+    fi
+fi
+
+if [ -n "`initctl status xsession/sysuid | grep running`" ]
+then
+    /sbin/initctl stop xsession/sysuid
+fi
+
+gconftool -s -t i /apps/system-ui-extensions/rebootdouble 0
+gconftool -s -t i /apps/system-ui-extensions/rebootloop 0
+
+if !(gconftool --dir-exists /apps/system-ui-extensions/brightness)
+then
+    gconftool -s -t i /apps/system-ui-extensions/brightness/red 255
+    gconftool -s -t i /apps/system-ui-extensions/brightness/green 127
+    gconftool -s -t i /apps/system-ui-extensions/brightness/blue 64
+fi
+
+if !(gconftool --dir-exists /apps/system-ui-extensions/tools/bluetooth)
+then
+    gconftool -s -t b /apps/system-ui-extensions/tools/bluetooth/working true
+    gconftool -s -t i /apps/system-ui-extensions/tools/bluetooth/index 0
+fi
+if !(gconftool --dir-exists /apps/system-ui-extensions/tools/cellular)
+then
+    gconftool -s -t b /apps/system-ui-extensions/tools/cellular/working true
+    gconftool -s -t i /apps/system-ui-extensions/tools/cellular/index 1
+fi
+if !(gconftool --dir-exists /apps/system-ui-extensions/tools/flashlight)
+then
+    gconftool -s -t b /apps/system-ui-extensions/tools/flashlight/working true
+    gconftool -s -t i /apps/system-ui-extensions/tools/flashlight/index 2
+fi
+if !(gconftool --dir-exists /apps/system-ui-extensions/tools/radio)
+then
+    gconftool -s -t b /apps/system-ui-extensions/tools/radio/working true
+    gconftool -s -t i /apps/system-ui-extensions/tools/radio/index 3
+fi
+if !(gconftool --dir-exists /apps/system-ui-extensions/tools/psm)
+then
+    gconftool -s -t b /apps/system-ui-extensions/tools/psm/working true
+    gconftool -s -t i /apps/system-ui-extensions/tools/psm/index 4
+fi
+if !(gconftool --dir-exists /apps/system-ui-extensions/tools/brightness)
+then
+    gconftool -s -t b /apps/system-ui-extensions/tools/brightness/working true
+    gconftool -s -t i /apps/system-ui-extensions/tools/brightness/index 5
+fi
+if !(gconftool --dir-exists /apps/system-ui-extensions/tools/usb)
+then
+    gconftool -s -t b /apps/system-ui-extensions/tools/usb/working true
+    gconftool -s -t i /apps/system-ui-extensions/tools/usb/index 6
+fi
+if !(gconftool --dir-exists /apps/system-ui-extensions/tools/reboot)
+then
+    gconftool -s -t b /apps/system-ui-extensions/tools/reboot/working true
+    gconftool -s -t i /apps/system-ui-extensions/tools/reboot/index 7
+fi
+if !(gconftool --dir-exists /apps/system-ui-extensions/tools/bgconn)
+then
+    gconftool -s -t b /apps/system-ui-extensions/tools/bgconn/working true
+    gconftool -s -t i /apps/system-ui-extensions/tools/bgconn/index 8
+fi
+if !(gconftool --dir-exists /apps/system-ui-extensions/tools/glol)
+then
+    gconftool -s -t b /apps/system-ui-extensions/tools/glol/working true
+    gconftool -s -t i /apps/system-ui-extensions/tools/glol/index 9
+fi
+
+exit 0

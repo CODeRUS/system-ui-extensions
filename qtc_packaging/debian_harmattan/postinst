@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set_applet()
+{
+    template_path="/usr/share/meegotouch/applicationextensions/statusindicatormenu-${1}.desktop"
+    template_data="[Desktop Entry]\nType=X-MeeGoApplicationExtension\nName=Status Indicator Menu Applet\n\n[X-MeeGoApplicationExtension]\nInterface=com.meego.core.MStatusIndicatorMenuExtensionInterface/1.0\nExtension=libstatusindicatormenu-${2}.so"
+    echo -e $template_data > $template_path
+}
+
+set -e
+
+gconftool -s -t str /apps/system-ui-extensions/postinst $1
+
+if [ "$1" == "configure" ]; then
+    echo "Post-installation script configure ..."
+
+    if pidof extensionsDaemon > /dev/null; then
+        if [ -n "`initctl status apps/extensionsDaemon | grep running`" ]
+        then
+            /sbin/initctl stop apps/extensionsDaemon
+            /sbin/initctl start apps/extensionsDaemon
+        else
+            killall extensionsDaemon
+            /sbin/initctl start apps/extensionsDaemon
+        fi
+    else
+        /sbin/initctl start apps/extensionsDaemon
+    fi
+fi
+
+set_applet call extensions
+
+if [ -n "`initctl status xsession/sysuid | grep running`" ]
+then
+    /sbin/initctl restart xsession/sysuid
+else
+    /sbin/initctl start xsession/sysuid
+fi
+
+exit 0

@@ -1,0 +1,14 @@
+Source: system-ui-extensions
+Section: user/other
+Priority: optional
+Maintainer: CODeRUS <coderusinbox@gmail.com>
+Build-Depends: debhelper (>= 5), libqt4-dev
+Standards-Version: 3.7.3
+Homepage: <insert the upstream URL, if relevant>
+
+Package: system-ui-extensions
+Architecture: armel
+Depends: system-ui
+Conflicts: unrestricted-system-ui
+Description: Extensions for Status Menu
+XSBC-Maemo-Display-Name: Extensions for Status Menu

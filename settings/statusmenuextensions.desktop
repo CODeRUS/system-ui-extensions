@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=DUIApplet
+Name=Status Menu
+Icon=
+Exec=
+
+[DUI]
+X-DUIApplet-Applet=libstatusmenuextensionsapplet.so
+
+[DCP]
+Category=Applications
+Order=1
+WidgetType=Label
+

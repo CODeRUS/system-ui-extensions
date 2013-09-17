@@ -1,0 +1,34 @@
+#!/bin/sh
+
+restore_applet()
+{
+    template_path="/usr/share/meegotouch/applicationextensions/statusindicatormenu-${1}.desktop"
+    template_data="[Desktop Entry]\nType=X-MeeGoApplicationExtension\nName=Status Indicator Menu Applet\n\n[X-MeeGoApplicationExtension]\nInterface=com.meego.core.MStatusIndicatorMenuExtensionInterface/1.0\nExtension=libstatusindicatormenu-${1}.so"
+    echo -e $template_data > $template_path
+}
+
+set -e
+
+gconftool -s -t str /apps/system-ui-extensions/postrm $1
+
+if [ "$1" == "remove" ] || [ "$1" == "purge" ] || [ "$1" == "abort-install" ]; then
+    echo "Post-removal script remove/purge..."
+
+    restore_applet call
+    restore_applet internetconnection
+    restore_applet bluetooth
+    restore_applet presence
+
+    if [ -n "`initctl status xsession/sysuid | grep waiting`" ]
+    then
+        /sbin/initctl start xsession/sysuid
+    fi
+
+    if [ -f /etc/init/apps/extensionsDaemon.conf ]; then
+        rm -f /etc/init/apps/extensionsDaemon.conf
+    fi
+
+    aegis-exec gconftool --recursive-unset /apps/system-ui-extensions
+fi
+
+exit 0
